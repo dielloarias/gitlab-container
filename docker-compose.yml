@@ -1,0 +1,23 @@
+
+version: "3.1"
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: git-container
+    restart: always
+    # hostname: 'gitlab.example.com'
+    hostname: 'localhost'
+    networks: 
+      - gitlab-net
+    ports:
+      - '80:80'
+      - '443:443'
+      - '2022:2022'
+    volumes:
+      - './volume/srv/gitlab/config:/etc/gitlab'
+      - './volume/srv/gitlab/logs:/var/log/gitlab'
+      - './volume/srv/gitlab/data:/var/opt/gitlab'
+networks: 
+  gitlab-net:
+    driver: bridge
